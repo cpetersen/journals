@@ -1,0 +1,3 @@
+web:        ./script/rails server thin
+postgres:   postgres -D /usr/local/var/postgres
+memcached:  /usr/local/bin/memcached

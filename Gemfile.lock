@@ -1,3 +1,10 @@
+PATH
+  remote: ../plos
+  specs:
+    plos (0.0.3)
+      nokogiri
+      rest-client
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -184,6 +191,7 @@ DEPENDENCIES
   jquery-rails
   omniauth (~> 0.2.0)
   pg
+  plos!
   rails (= 3.2.11)
   rspec-rails (>= 2.0.1)
   sass-rails (~> 3.2.3)

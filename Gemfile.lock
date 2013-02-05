@@ -1,7 +1,7 @@
 PATH
   remote: ../plos
   specs:
-    plos (0.0.5)
+    plos (0.0.6)
       nokogiri
       rest-client
 

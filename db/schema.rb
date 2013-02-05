@@ -11,16 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204054543) do
+ActiveRecord::Schema.define(:version => 20130205024912) do
+
+  create_table "article_refs", :force => true do |t|
+    t.integer  "sequence"
+    t.string   "plos_id"
+    t.string   "plos_part"
+    t.text     "xml"
+    t.text     "error"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "articles", :force => true do |t|
-    t.integer  "plos_id"
+    t.string   "plos_id"
     t.integer  "sequence"
-    t.text     "ref_xml"
-    t.text     "article_xml"
+    t.text     "xml"
     t.text     "error"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

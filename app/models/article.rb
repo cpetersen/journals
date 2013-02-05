@@ -1,3 +1,3 @@
 class Article < ActiveRecord::Base
-  attr_accessible :article_xml, :error, :plos_id, :ref_xml, :sequence
+  attr_accessible :error, :plos_id, :sequence, :xml
 end

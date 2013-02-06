@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205024912) do
+ActiveRecord::Schema.define(:version => 20130205064429) do
 
   create_table "article_refs", :force => true do |t|
     t.integer  "sequence"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20130205024912) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "article_refs", ["plos_id"], :name => "index_article_refs_on_plos_id"
+
   create_table "articles", :force => true do |t|
     t.string   "plos_id"
     t.integer  "sequence"
@@ -31,5 +33,7 @@ ActiveRecord::Schema.define(:version => 20130205024912) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "articles", ["plos_id"], :name => "index_articles_on_plos_id"
 
 end

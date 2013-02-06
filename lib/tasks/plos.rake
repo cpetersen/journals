@@ -6,11 +6,12 @@ namespace :plos do
     task :import => [:environment] do
       client = PLOS::Client.new(ENV['API_KEY'])
       ROWS = 200
-      start = 0
-      total = ROWS+1
+      start = 542600
+      total = start+ROWS+1
       # stopper = 600
       # while(stopper >= (start+ROWS)) do
       while(total >= (start+ROWS)) do
+        puts "GETTING #{start} to #{start+ROWS}"
         hits = client.all(start, ROWS)
         hits.each_with_index do |hit, index|
           article_ref = ArticleRef.new
@@ -25,4 +26,30 @@ namespace :plos do
       end
     end
   end
+
+  namespace :articles do
+    desc 'Import all references from search'
+    task :import => [:environment] do
+      client = PLOS::Client.new(ENV['API_KEY'])
+      ids = ArticleRef.count(:group => "plos_id")
+      ids.keys.each_with_index do |plos_id, index|
+        unless Article.find_by_plos_id(plos_id) # skip existing
+          puts "Importing #{index} of #{ids.keys.size}"
+          article = Article.new(:plos_id => plos_id)
+          begin
+            pa = PLOS::Article.get(plos_id)
+            article.xml = pa.node.to_s
+          rescue Exception => e
+            article.error = e.inspect
+          end
+          article.save
+        end
+      end
+    end
+  end
 end
+
+# 195400
+# 379000
+# 428800
+# 542800

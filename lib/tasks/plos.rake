@@ -34,12 +34,12 @@ namespace :plos do
       ids = ArticleRef.count(:group => "plos_id")
       ids.keys.each_with_index do |plos_id, index|
         unless Article.find_by_plos_id(plos_id) # skip existing
-          puts "Importing #{index} of #{ids.keys.size}"
           article = Article.new(:plos_id => plos_id)
           begin
-            pa = PLOS::Article.get(plos_id)
-            article.xml = pa.node.to_s
+            article.xml = PLOS::Article.content(plos_id)
+            puts "Importing #{index} of #{ids.keys.size}"
           rescue Exception => e
+            puts "Error on #{index} of #{ids.keys.size}"
             article.error = e.inspect
           end
           article.save
